@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Życzenia wideo dla Marka</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Orbitron', sans-serif;
+      background: radial-gradient(circle at top, #0a0f1f, #000);
+      color: #e0f7ff;
+      text-align: center;
+      overflow-x: hidden;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-top: 60px;
+      text-shadow: 0 0 15px #00ffff;
+    }
+
+    .video-gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 40px;
+      margin: 60px auto;
+      max-width: 1200px;
+    }
+
+    .video-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px;
+      box-shadow: 0 0 25px rgba(0,255,255,0.2);
+      width: 340px;
+      padding: 20px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .video-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 40px rgba(0,255,255,0.4);
+    }
+
+    video {
+      width: 100%;
+      border-radius: 10px;
+      margin-top: 10px;
+      display: none;
+    }
+
+    .thumbnail {
+      width: 100%;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: opacity 0.3s ease;
+    }
+
+    .thumbnail:hover {
+      opacity: 0.8;
+    }
+
+    .btn-next {
+      display: inline-block;
+      margin: 50px auto;
+      padding: 15px 40px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      background: linear-gradient(90deg, #00ffff, #ff00ff);
+      border: none;
+      border-radius: 50px;
+      color: #000;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+
+    .btn-next:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 30px #00ffff;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🎥 Życzenia urodzinowe dla Marka</h1>
+
+<h2> Kilka osób chciało się dołączyć - sam zobacz. :) </h2>
+
+  <div class="video-gallery">
+
+    <div class="video-card">
+      <h2>Abelard Giza</h2>
+      <img src="abelard.jpg" alt="Abelard Giza" class="thumbnail" onclick="playVideo('abelard')">
+      <video id="abelard" controls preload="auto">
+        <source src="abelard.mov">
+        Twoja przeglądarka nie obsługuje wideo.
+      </video>
+    </div>
+
+    <div class="video-card">
+      <h2>Grzegorz „Dakann” Barański</h2>
+      <img src="dakann.jpg" alt="Dakann" class="thumbnail" onclick="playVideo('dakann')">
+      <video id="dakann" controls preload="auto">
+        <source src="dakann.mp4" type="video/mp4">
+        Twoja przeglądarka nie obsługuje wideo.
+      </video>
+    </div>
+
+  </div>
+
+  <a href="final.html" class="btn-next">Przejdź dalej →</a>
+
+  <script>
+    function playVideo(id) {
+      const video = document.getElementById(id);
+      const thumb = video.previousElementSibling;
+
+      // ukryj miniaturę, pokaż wideo
+      thumb.style.display = "none";
+      video.style.display = "block";
+      video.play();
+
+      // zatrzymaj inne wideo, jeśli grają
+      document.querySelectorAll("video").forEach(v => {
+        if (v !== video) {
+          v.pause();
+          v.style.display = "none";
+          v.previousElementSibling.style.display = "block";
+        }
+      });
+    }
+
+    // po zakończeniu — powrót do miniatury
+    document.querySelectorAll("video").forEach((vid) => {
+      vid.addEventListener("ended", () => {
+        vid.style.display = "none";
+        vid.previousElementSibling.style.display = "block";
+      });
+    });
+  </script>
+</body>
+</html>
